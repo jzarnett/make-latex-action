@@ -2,11 +2,8 @@
 
 set -e
 
-root_file="$1"
-working_directory="$2"
-compiler="$3"
-args="$4"
-extra_system_packages="$5"
+working_directory="$1"
+extra_system_packages="$2"
 
 if [ -n "$extra_system_packages" ]; then
   apt-get update
@@ -20,4 +17,5 @@ if [ -n "$working_directory" ]; then
   cd "$working_directory"
 fi
 
-"$compiler" $args "$root_file"
+make
+

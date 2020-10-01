@@ -1,26 +1,14 @@
-# latex-action [![GitHub Actions Status](https://github.com/dante-ev/latex-action/workflows/Test%20Github%20Action/badge.svg)](https://github.com/dante-ev/latex-action/actions)
+# make-latex-action
 
-> GitHub Action to compile LaTeX documents.
+> GitHub Action to compile multiple LaTeX documents.
 
-This actions runs on docker using a [maximal TeXLive environment](https://hub.docker.com/r/danteev/texlive/) installed.
+This action runs on docker using a [maximal TeXLive environment](https://hub.docker.com/r/danteev/texlive/) installed. Instead of the parent latex-action, though, it simply calls `make` in the specified directory.
 
 ## Inputs
-
-* `root_file`
-
-    The root LaTeX file to be compiled. This input is required.
 
 * `working_directory`
 
     The working directory for the latex compiler to be invoked.
-
-* `compiler`
-
-    The LaTeX engine to be used. By default, [`latexmk`](https://ctan.org/pkg/latexmk) is used, which automates the process of generating LaTeX documents by issuing the appropriate sequence of commands to be run.
-
-* `args`
-
-    The extra arguments to be passed to the compiler. By default, it is `-pdf -latexoption=-file-line-error -latexoption=-interaction=nonstopmode`. This tells `latexmk` to use `pdflatex`. Refer to [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
 
 * `extra_system_packages`
 
@@ -38,24 +26,16 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v1
       - name: Compile LaTeX document
-        uses: dante-ev/latex-action@master
+        uses: patricklam/make-latex-action@master
         with:
-          root_file: main.tex
+          working_directory: lectures
 ```
 
 ## FAQs
 
-### How to use XeLaTeX or LuaLaTeX instead of pdfLaTeX?
-
-By default, this action uses pdfLaTeX. If you want to use XeLaTeX or LuaLaTeX, you can set the `args` to `-xelatex -latexoption=-file-line-error -latexoption=-interaction=nonstopmode` or `-lualatex -latexoption=-file-line-error -latexoption=-interaction=nonstopmode` respectively. Alternatively, you could create a `.latexmkrc` file. Refer to the [`latexmk` document](http://texdoc.net/texmf-dist/doc/support/latexmk/latexmk.pdf) for more information.
-
-### How to enable `--shell-escape`?
-
-To enable `--shell-escape`, you should add it to `args`. For example, set `args` to `-pdf -latexoption=-file-line-error -latexoption=-interaction=nonstopmode -latexoption=-shell-escape` when using pdfLaTeX.
-
 ### Where does the initial code come from?
 
-The initial code is from [xu-cheng/latex-action](https://github.com/xu-cheng/latex-action).
+The initial code is from [xu-cheng/latex-action](https://github.com/xu-cheng/latex-action), updated at [dante-ev/latex-action](https://github.com/dante-ev/latex-action).
 The idea there is to initially provide all packages instead of using [texliveonfly](https://ctan.org/pkg/texliveonfly).
 Using a full installation, this action also offers to use packages such as [pax](https://ctan.org/pkg/pax), which require other tooling such as perl.
 More reasoning is given in [ADR-0002](https://github.com/dante-ev/docker-texlive/blob/master/docs/adr/0002-provide-all-packages.md#provide-all-packages).
