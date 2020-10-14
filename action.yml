@@ -17,8 +17,6 @@ inputs:
     description: Install extra packages by apt-get
   pushback:
     description: set to true to commit compiled PDFs to compiled/ subdirectory
-  files:
-    description: the files that pushback is to move to the compiled/ subdirectory
 runs:
   using: docker
   image: Dockerfile

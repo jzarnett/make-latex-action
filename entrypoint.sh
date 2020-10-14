@@ -5,7 +5,6 @@ set -e
 working_directory="$1"
 extra_system_packages="$2"
 pushback="$3"
-files="$4"
 
 if [ -n "$extra_system_packages" ]; then
   apt-get update
@@ -22,13 +21,12 @@ fi
 make
 
 if [ "$pushback" = true ] ; then
-        echo "moving files $files"
 	rm -rf compiled
         mkdir compiled
-        mv $files compiled/
+        mv *.pdf compiled/
 	git config --global user.name "github-actions[bot] on behalf of Patrick Lam"
 	git config --global user.email "prof.lam@gmail.com"
-	git add $files
+	git add compiled
 	git commit -m "auto-compile"
 	git push
 fi
