@@ -22,8 +22,10 @@ fi
 make
 
 if [ "$pushback" = true ] ; then
-	rm -rf compiled; mkdir compiled
-  mv $files compiled/
+        echo "moving files $files"
+	rm -rf compiled
+        mkdir compiled
+        mv $files compiled/
 	git config --global user.name "github-actions[bot] on behalf of Patrick Lam"
 	git config --global user.email "prof.lam@gmail.com"
 	git add $files
