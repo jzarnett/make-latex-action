@@ -4,6 +4,8 @@ set -e
 
 working_directory="$1"
 extra_system_packages="$2"
+pushback="$3"
+files="$4"
 
 if [ -n "$extra_system_packages" ]; then
   apt-get update
@@ -18,4 +20,14 @@ if [ -n "$working_directory" ]; then
 fi
 
 make
+
+if [ "$pushback" = true ] ; then
+	rm -rf compiled; mkdir compiled
+  mv $files compiled/
+	git config --global user.name "github-actions[bot] on behalf of Patrick Lam"
+	git config --global user.email "prof.lam@gmail.com"
+	git add $files
+	git commit -m "auto-compile"
+	git push
+fi
 
