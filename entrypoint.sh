@@ -29,7 +29,6 @@ if [ "$pushback" = true ] ; then
         echo "!*.pdf" > compiled/.gitignore
 	git add compiled/.gitignore
         git add compiled
-	git commit -m "auto-compile"
-	git push
+	git commit -m "auto-compile" && git push || true
 fi
 
