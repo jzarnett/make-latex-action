@@ -24,8 +24,8 @@ if [ "$pushback" = true ] ; then
 	rm -rf compiled
         mkdir compiled
         mv *.pdf compiled/
-	git config --global user.name "github-actions[bot] on behalf of Patrick Lam"
-	git config --global user.email "prof.lam@gmail.com"
+	git config --global user.name "github-actions[bot] on behalf of Jeff Zarnett"
+	git config --global user.email "jzarnett@gmail.com"
         echo "!*.pdf" > compiled/.gitignore
 	git add compiled/.gitignore
         git add compiled
